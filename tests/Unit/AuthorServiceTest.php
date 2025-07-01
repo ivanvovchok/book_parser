@@ -17,7 +17,6 @@ class AuthorServiceTest extends TestCase
     {
         parent::setUp();
 
-        // Отримаємо сервіс через контейнер (після бінду інтерфейсу)
         $this->service = app(AuthorService::class);
     }
 
