@@ -4,6 +4,7 @@ namespace App\Repositories\Book;
 
 use App\Models\Book;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 class BookRepository implements BookRepositoryInterface
 {
@@ -20,5 +21,13 @@ class BookRepository implements BookRepositoryInterface
             $q->whereHas('authors', fn($q) => $q->where('id', $authorId))
             )
             ->paginate(15);
+    }
+
+    public function getByAuthor(int $authorId): Collection
+    {
+        return Book::query()
+            ->whereHas('authors', fn($q) => $q->where('authors.id', $authorId))
+            ->with('authors')
+            ->get();
     }
 }
