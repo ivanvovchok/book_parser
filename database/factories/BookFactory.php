@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\BookStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +24,7 @@ class BookFactory extends Factory
             'long_description'  => $this->faker->optional()->paragraphs(3, true),
             'page_count'        => $this->faker->numberBetween(100, 600),
             'published_date'    => $this->faker->date(),
-            'status'            => 'PUBLISH',
+            'status'            => BookStatus::PUBLISH->value,
             'thumbnail_url'     => $this->faker->imageUrl(200, 300, 'books'),
         ];
     }
