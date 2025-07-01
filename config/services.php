@@ -35,4 +35,7 @@ return [
         ],
     ],
 
+    'books' => [
+        'url' => env('BOOKS_JSON_URL'),
+    ],
 ];
