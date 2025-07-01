@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\BookStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Book extends Model
 {
@@ -26,12 +27,12 @@ class Book extends Model
         'page_count' => 'integer',
     ];
 
-    public function authors()
+    public function authors(): BelongsToMany
     {
         return $this->belongsToMany(Author::class, 'authors_books', 'book_id', 'author_id');
     }
 
-    public function categories()
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'books_categories', 'book_id', 'category_id');
     }
