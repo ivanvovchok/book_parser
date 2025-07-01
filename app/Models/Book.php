@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use App\Enums\BookStatus;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'title',
         'isbn',
