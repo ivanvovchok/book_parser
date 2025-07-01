@@ -11,5 +11,3 @@ interface BookRepositoryInterface
 
     public function getByAuthor(int $authorId): Collection;
 }
-
-

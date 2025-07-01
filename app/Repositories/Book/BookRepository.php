@@ -18,7 +18,7 @@ class BookRepository implements BookRepositoryInterface
             $q->where('short_description', 'like', "%{$description}%")->orWhere('long_description', 'like', "%{$description}%")
             )
             ->when($filters['author_id'] ?? null, fn($q, $authorId) =>
-            $q->whereHas('authors', fn($q) => $q->where('id', $authorId))
+            $q->whereHas('authors', fn($q) => $q->where('authors.id', $authorId))
             )
             ->paginate(15);
     }
