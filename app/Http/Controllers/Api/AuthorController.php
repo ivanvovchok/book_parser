@@ -12,10 +12,7 @@ use Illuminate\Http\JsonResponse;
 
 class AuthorController extends Controller
 {
-    public function __construct(
-        protected AuthorService $authorService,
-        protected BookService $bookService
-    ) {}
+    public function __construct(protected AuthorService $authorService, protected BookService $bookService) {}
 
     public function index(AuthorSearchRequest $request): JsonResponse
     {
