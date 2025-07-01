@@ -52,3 +52,15 @@ php artisan app:import-books
   - `name` - Filter by author name.
   
 - `GET /api/authors/{id}/books` - Get books by author ID.
+
+### Static code analysis
+To run static code analysis, you can use the following command:
+```bash
+./vendor/bin/phpstan analyse --memory-limit=512M
+```
+
+### Tests
+To run tests, you can use the following command:
+```bash
+php artisan test
+```
