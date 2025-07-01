@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Http;
 class ImportBooks extends Command
 {
     protected $signature = 'app:import-books';
-    protected $description = 'Parse the books from the JSON file and import them into the database';
+    protected $description = 'Parses the books from the JSON file and imports them into the database';
 
     public function handle(): void
     {
@@ -22,6 +22,7 @@ class ImportBooks extends Command
 
         if (!$booksUrl) {
             $this->error('Books JSON URL is not configured.');
+
             return;
         }
 
@@ -29,14 +30,23 @@ class ImportBooks extends Command
 
         if ($response->failed()) {
             $this->error("Failed to fetch books from the URL: $booksUrl");
+
             return;
         }
 
         $books = $response->json();
 
+        $totalBooks = 0;
+        $skippedBooks = 0;
+
         foreach ($books as $item) {
+            $totalBooks++;
+
             if (!$this->isValidBookData($item)) {
+                $skippedBooks++;
+
                 $this->warn('Skipping invalid item with missing ISBN, title or authors.');
+
                 continue;
             }
 
@@ -44,6 +54,8 @@ class ImportBooks extends Command
         }
 
         $this->info('Books imported successfully.');
+        $this->info("Total books processed: $totalBooks");
+        $this->info("Books skipped due to missing data: $skippedBooks");
     }
 
     private function isValidBookData(array $item): bool
